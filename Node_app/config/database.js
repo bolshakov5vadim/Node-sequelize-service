@@ -3,10 +3,10 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize(
   'mydb',
   'user1',
-  'Baumkuchen',
+  'pswd',
   {
     dialect: 'postgres',
-    host: '192.168.56.101',
+    host: '192.178.56.1',
     port: 5432,
     logging: false
   }
