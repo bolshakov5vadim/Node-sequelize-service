@@ -9,17 +9,27 @@ const Entity = require('../models/entity');
 
 // GET-рут сервиса
 router.get('/', async (req, res) => {
-    const entities = await Entity.findAll();
-    res.json(entities);
+    try {
+        const entities = await Entity.findAll();
+        res.json(entities);
+    }
+    catch (error) {
+        res.json({ message: 'Ошибка чтения' });
+    }
 });
 // async необходимо указывать при работе с Entity
 
 
 // POST-рут сервиса
 router.post('/', async (req, res, next) => {
-    const { entity } = req.body;
-    await Entity.create({ entity });
-    res.json({ message: 'Сущность создана'});
+    try {
+        const { entity } = req.body;
+        await Entity.create({ entity });
+        res.json({ message: 'Сущность создана'});
+    }
+    catch (error) {
+        res.json({ message: 'Ошибка добавления сущности' });
+    }
 });
 
 
@@ -34,6 +44,7 @@ router.delete('/', async (req, res, next) => {
     catch (error) {
         await transaction.rollback();
         res.json({ message: 'Ошибка удаления' });
+    }
 });
 
 
